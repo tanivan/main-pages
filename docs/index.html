@@ -26,7 +26,7 @@
 <meta name="author" content="Ivan Tan">
 
 
-<meta name="date" content="2017-03-02">
+<meta name="date" content="2017-03-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,7 +108,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#basket"><i class="fa fa-check"></i><b>1.1</b> Basket</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.2</b> Worst-of</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.3</b> Best-of</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#outperf"><i class="fa fa-check"></i><b>1.4</b> Spread</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>2</b> Sensitivity</a><ul>
 <li class="chapter" data-level="2.1" data-path="sensi.html"><a href="sensi.html#vol-smile"><i class="fa fa-check"></i><b>2.1</b> Vol &amp; Smile</a></li>
@@ -120,6 +119,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1.1" data-path="payoff.html"><a href="payoff.html#digitals"><i class="fa fa-check"></i><b>3.1.1</b> Digitals</a></li>
 <li class="chapter" data-level="3.1.2" data-path="payoff.html"><a href="payoff.html#pdi"><i class="fa fa-check"></i><b>3.1.2</b> Put Down and In</a></li>
 <li class="chapter" data-level="3.1.3" data-path="payoff.html"><a href="payoff.html#cuo"><i class="fa fa-check"></i><b>3.1.3</b> Call Up and Out</a></li>
+<li class="chapter" data-level="3.1.4" data-path="payoff.html"><a href="payoff.html#combinations"><i class="fa fa-check"></i><b>3.1.4</b> Combinations</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="payoff.html"><a href="payoff.html#autocallable"><i class="fa fa-check"></i><b>3.2</b> Autocallable</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="payoff.html"><a href="payoff.html#apollon"><i class="fa fa-check"></i><b>3.2.1</b> Snowball</a></li>
@@ -165,11 +165,11 @@ derived from public sources</a></li>
 <div id="header">
 <h1 class="title">Notes</h1>
 <h4 class="author"><em>Ivan Tan</em></h4>
-<h4 class="date"><em>2017-03-02</em></h4>
+<h4 class="date"><em>2017-03-05</em></h4>
 </div>
 <div id="diffuse" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Diffusion</h1>
-<p>Suppose we prefer to model an equity diffusion using the GBM model:</p>
+<p>In no-arbitrage pricing we one way to model a stock diffusion is using the following GBM model:</p>
 <p><span class="math display">\[S_T = S_0 \cdot  e^{\Big( r-d-q -\frac{1}{2}\sigma^2 \Big)\cdot T + \sigma \sqrt{T}\cdot W_T } \]</span></p>
 <p>Given the drift and volatility parameters we can simulate sample final spot levels as such:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aSampleSpotT =<span class="st"> </span>function(s0, r, d, q, sig, dt, nsims)
@@ -179,15 +179,15 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  0.8589298</code></pre>
+<pre><code>## Spot after 1 year:  0.9048997</code></pre>
 <p>If required we could compute over several short periods to create a trajectory. Then repeat it many times to see how the diffusion is going to look like.</p>
-<p>Assuming we will drift the equity by 0% p.a., that is <span class="math inline">\(r - d - q = 0\)</span>, and it has annualised volatility of 20%, let’s plot several trajectories or paths, see Figure <a href="index.html#fig:several-traj">1.1</a>:</p>
+<p>Assuming we will drift the equity by 0% p.a., that is <span class="math inline">\(r - d - q = 0\)</span>, and it has annualised volatility of 20%, Let’s plot several trajectories or paths. See Figure <a href="index.html#fig:several-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly</span>
 oneTraj =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, numSteps)
 for (i in <span class="dv">2</span>:numSteps)
   oneTraj[i] =<span class="st"> </span><span class="kw">aSampleSpotT</span>(oneTraj[i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/numSteps, <span class="dv">1</span>)
 <span class="kw">cat</span>(<span class="st">&quot;First 5 weekly close: &quot;</span>, oneTraj[<span class="dv">1</span>:<span class="dv">5</span>])</code></pre></div>
-<pre><code>## First 5 weekly close:  1 1.013497 1.021332 1.014106 1.023558</code></pre>
+<pre><code>## First 5 weekly close:  1 1.029598 0.9638758 0.9302029 0.9045659</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(oneTraj, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
      <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
@@ -202,9 +202,9 @@ for (i in <span class="dv">2</span>:numSteps)
 for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(manyTraj)) 
   <span class="kw">lines</span>(manyTraj[i,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:several-traj"></span>
-<img src="bookdown-demo_files/figure-html/several-traj-1.png" alt="Left: 1 path, Right: 100 paths" width="80%" />
+<img src="bookdown-demo_files/figure-html/several-traj-1.png" alt="Left: 1 path, Right: 50 paths" width="80%" />
 <p class="caption">
-Figure 1.1: Left: 1 path, Right: 100 paths
+Figure 1.1: Left: 1 path, Right: 50 paths
 </p>
 </div>
 <div id="basket" class="section level2">
@@ -213,7 +213,7 @@ Figure 1.1: Left: 1 path, Right: 100 paths
 <p>As an example we have a basket on three underlyings, their log returns all have pairwise correlation of 90%, see Table <a href="index.html#tab:basket-correl">1.1</a>.</p>
 <p>The (multivariate) GBM process can be extended to correlated underlyings, with their correlations preserved in the multivariate random process.</p>
 <p>One way of generating a correlated multivariate random <span class="math inline">\(W_T\)</span> vector is to left-multiply a lower triangle Cholesky decomposed correlation matrix to an uncorrelated random vector.<a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#Monte_Carlo_simulation">1</a> <a href="http://math.stackexchange.com/questions/163470/generating-correlated-random-numbers-why-does-cholesky-decomposition-work">2</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.9</span>, <span class="fl">0.9</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_more =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.9</span>, <span class="fl">0.9</span>, 
                 <span class="fl">0.9</span>, <span class="fl">1.0</span>, <span class="fl">0.9</span>,
                 <span class="fl">0.9</span>, <span class="fl">0.9</span>, <span class="fl">1.0</span>), 
               <span class="dt">nrow =</span> <span class="dv">3</span>,
@@ -258,18 +258,18 @@ Figure 1.1: Left: 1 path, Right: 100 paths
 <span class="st">                  </span>sig *<span class="st"> </span>correlatedRV *<span class="st"> </span><span class="kw">sqrt</span>(dt))
   sT
 }
-numUndls =<span class="st"> </span><span class="kw">nrow</span>(corr)
+numUndls =<span class="st"> </span><span class="kw">nrow</span>(corr_more)
 numSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly</span>
 
 corrTraj =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, numSteps*numUndls), <span class="dt">nrow =</span> numUndls)
 for (i in <span class="dv">2</span>:numSteps)
-  corrTraj[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/numSteps, corr)
+  corrTraj[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/numSteps, corr_more)
 
 <span class="kw">print</span>(corrTraj[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9781670 0.9666824 0.9681734 0.9624407
-## [2,]    1 0.9763906 0.9659574 0.9460305 0.9609013
-## [3,]    1 0.9910019 0.9783753 0.9666709 0.9546967</code></pre>
+## [1,]    1 0.9921613 0.9449369 0.9508708 0.9184217
+## [2,]    1 0.9845248 0.9302299 0.9269184 0.8951975
+## [3,]    1 0.9812859 0.9260241 0.9470284 0.9181487</code></pre>
 <p>Sample paths of the underlyings. Underlying 1 in Black, Underlying 2 in Red, and Underlying 3 in Green. See Figure <a href="index.html#fig:correl-traj">1.2</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:correl-traj"></span>
 <img src="bookdown-demo_files/figure-html/correl-traj-1.png" alt="Separate simulations of the basket trajectories" width="80%" />
@@ -280,12 +280,114 @@ Figure 1.2: Separate simulations of the basket trajectories
 </div>
 <div id="worstof" class="section level2">
 <h2><span class="header-section-number">1.2</span> Worst-of</h2>
+<p>From a basket of underlyings, we could choose the lowest performing underlying and call it the worst-of underlying. Doing this selection over the entire tenor we can visual what a worst-of trajectory looks like.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_less =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.1</span>, 
+                <span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>,
+                <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>), 
+              <span class="dt">nrow =</span> <span class="dv">3</span>,
+              <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;undl1&quot;</span>, <span class="st">&quot;undl2&quot;</span>, <span class="st">&quot;undl3&quot;</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;undl1&quot;</span>, <span class="st">&quot;undl2&quot;</span>, <span class="st">&quot;undl3&quot;</span>)))
+
+corrTraj2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, numSteps*numUndls), <span class="dt">nrow =</span> numUndls)
+for (i in <span class="dv">2</span>:numSteps)
+  corrTraj2[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj2[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.15</span>, <span class="dv">1</span>/numSteps, corr_less)</code></pre></div>
+<p>To make it obvious that a worst-of “underlying” can be different as different point of time, we choose to create a much lower correlation basket of underlyings, and reduced the annualised volatility to 15%.</p>
+<p>In this stylised result we see how the worst-of underlying can change over time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
+<pre><code>##      [,1]      [,2]     [,3]     [,4]      [,5]
+## [1,]    1 1.0341966 1.005334 1.003751 0.9971818
+## [2,]    1 1.0380406 1.054187 1.026348 0.9791170
+## [3,]    1 0.9984069 1.009408 1.001214 0.9934616</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">woTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, min)
+<span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
+<pre><code>## [1] 1.0000000 0.9984069 1.0053336 1.0012137 0.9791170</code></pre>
+<p>Let’s plot a one sample of the basket trajectories, then overlap with the worst-of “underlying” (in blue). See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj2), <span class="kw">max</span>(corrTraj2)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2)) 
+  <span class="kw">lines</span>(corrTraj2[i,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> basketCols[i])
+
+<span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj2), <span class="kw">max</span>(corrTraj2)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2)) 
+  <span class="kw">lines</span>(corrTraj2[i,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,  <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>)
+<span class="kw">lines</span>(woTraj, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:wo-traj-plot"></span>
+<img src="bookdown-demo_files/figure-html/wo-traj-plot-1.png" alt="A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)" width="672" />
+<p class="caption">
+Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)
+</p>
+</div>
+<p>When I first started it made no sense why anyone would want to buy a call option that tracks the worst performance. Turns out it meant for investors who have a bullish view on a basket of underlyings. Tracking on the worst-of is <em>a lot</em> cheaper than buying a call that is based of the average performance. As we’ll see in Chapter <a href="payoff.html#payoff">3</a>, this makes possible some interesting exotic payoffs.</p>
 </div>
 <div id="bestof" class="section level2">
 <h2><span class="header-section-number">1.3</span> Best-of</h2>
+<p>Having seen a worst-of <em>underlying</em>, there is no reason why we cannot have a best-of version. This time we select the best performing underlying instead of the worst.</p>
+<p>Unless the worst-of call, the best-of call is more expensive than basing of an average performance of the basket of underlying. However if you have a bearish view, buying a put or shorting a call is now a lot more attractive.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
+<pre><code>##      [,1]      [,2]     [,3]     [,4]      [,5]
+## [1,]    1 1.0341966 1.005334 1.003751 0.9971818
+## [2,]    1 1.0380406 1.054187 1.026348 0.9791170
+## [3,]    1 0.9984069 1.009408 1.001214 0.9934616</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, max)
+<span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
+<pre><code>## [1] 1.0000000 0.9984069 1.0053336 1.0012137 0.9791170</code></pre>
+<p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj2), <span class="kw">max</span>(corrTraj2)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2)) 
+  <span class="kw">lines</span>(corrTraj2[i,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> basketCols[i])
+
+<span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj2), <span class="kw">max</span>(corrTraj2)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2)) 
+  <span class="kw">lines</span>(corrTraj2[i,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>)
+<span class="kw">lines</span>(boTraj, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:bo-traj-plot"></span>
+<img src="bookdown-demo_files/figure-html/bo-traj-plot-1.png" alt="A basket of 3 underlyings (in grey) and the best-of underlying (in blue)" width="672" />
+<p class="caption">
+Figure 1.4: A basket of 3 underlyings (in grey) and the best-of underlying (in blue)
+</p>
 </div>
-<div id="outperf" class="section level2">
-<h2><span class="header-section-number">1.4</span> Spread</h2>
+<p>And with many repeated simulations:</p>
+<p>Overlaying the best-of “underlying” trajectories:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(corrTraj_sim[<span class="dv">1</span>, , <span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj_sim), <span class="kw">max</span>(corrTraj_sim)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (j in <span class="dv">1</span>:numSims)
+  for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(corrTraj_sim[, , j])) 
+    <span class="kw">lines</span>(corrTraj_sim[i, , j], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> basketCols[i])
+
+<span class="kw">plot</span>(corrTraj_sim[<span class="dv">1</span>, , <span class="dv">1</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>,
+     <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(corrTraj_sim), <span class="kw">max</span>(corrTraj_sim)))
+<span class="kw">box</span>()
+<span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>)
+for (j in <span class="dv">1</span>:numSims)
+  for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(corrTraj_sim[, , j])) 
+    <span class="kw">lines</span>(corrTraj_sim[i, , j], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;azure3&quot;</span>)
+
+for (i in <span class="dv">1</span>:numSims){
+  <span class="kw">lines</span>(boTraj_sim[i, ], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)
+}</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/bo-traj-simplot-1.png" width="672" /></p>
 
 </div>
 </div>
