@@ -33,7 +33,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="payoff.html">
+<link rel="prev" href="sensi.html">
 <link rel="next" href="scen.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -109,10 +109,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.2</b> Worst-of</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.3</b> Best-of</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>2</b> Sensitivity</a><ul>
-<li class="chapter" data-level="2.1" data-path="sensi.html"><a href="sensi.html#vol-smile"><i class="fa fa-check"></i><b>2.1</b> Vol &amp; Smile</a></li>
-<li class="chapter" data-level="2.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>2.2</b> Correl</a></li>
-<li class="chapter" data-level="2.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>2.3</b> Drift</a></li>
+<li class="chapter" data-level="2" data-path="volsurf.html"><a href="volsurf.html"><i class="fa fa-check"></i><b>2</b> Volatility Surface</a><ul>
+<li class="chapter" data-level="2.1" data-path="volsurf.html"><a href="volsurf.html#implied-vol-surface"><i class="fa fa-check"></i><b>2.1</b> Implied vol surface</a></li>
+<li class="chapter" data-level="2.2" data-path="volsurf.html"><a href="volsurf.html#local-vol-surface"><i class="fa fa-check"></i><b>2.2</b> Local vol surface</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="payoff.html"><a href="payoff.html"><i class="fa fa-check"></i><b>3</b> Payoff</a><ul>
 <li class="chapter" data-level="3.1" data-path="payoff.html"><a href="payoff.html#noncallable"><i class="fa fa-check"></i><b>3.1</b> Noncallable</a><ul>
@@ -128,18 +127,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.3</b> Issuercallable</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>4</b> Longstaff Schwartz</a></li>
-<li class="chapter" data-level="5" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>5</b> Scenario</a></li>
-<li class="chapter" data-level="6" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>6</b> Quirkiness</a><ul>
-<li class="chapter" data-level="6.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>6.1</b> Inversion</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>6.1.1</b> Delta</a></li>
-<li class="chapter" data-level="6.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>6.1.2</b> Vega</a></li>
+<li class="chapter" data-level="4" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>4</b> Sensitivity</a><ul>
+<li class="chapter" data-level="4.1" data-path="sensi.html"><a href="sensi.html#vol"><i class="fa fa-check"></i><b>4.1</b> Vol</a></li>
+<li class="chapter" data-level="4.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>4.2</b> Correl</a></li>
+<li class="chapter" data-level="4.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>4.3</b> Drift</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>6.2</b> Gap</a></li>
-<li class="chapter" data-level="6.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>6.3</b> Qto</a></li>
-<li class="chapter" data-level="6.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>6.4</b> Correl</a></li>
+<li class="chapter" data-level="5" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>5</b> Longstaff Schwartz</a></li>
+<li class="chapter" data-level="6" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>6</b> Scenario</a></li>
+<li class="chapter" data-level="7" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>7</b> Quirkiness</a><ul>
+<li class="chapter" data-level="7.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>7.1</b> Inversion</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>7.1.1</b> Delta</a></li>
+<li class="chapter" data-level="7.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>7.1.2</b> Vega</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="7.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>7.2</b> Gap</a></li>
+<li class="chapter" data-level="7.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>7.3</b> Qto</a></li>
+<li class="chapter" data-level="7.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>7.4</b> Correl</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
 <li><a href="./">Unless otherwise stated,<br/>
 all information here are<br/>
@@ -163,7 +167,7 @@ derived from public sources</a></li>
 
             <section class="normal" id="section-">
 <div id="lsmc" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Longstaff Schwartz</h1>
+<h1><span class="header-section-number">Chapter 5</span> Longstaff Schwartz</h1>
 <p>In Progress</p>
 <p>TODO: Show least square regression example to compute expected price, vs exercise/exit price. Determine optimal exercise strategy.</p>
 
@@ -173,7 +177,7 @@ derived from public sources</a></li>
           </div>
         </div>
       </div>
-<a href="payoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sensi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="scen.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

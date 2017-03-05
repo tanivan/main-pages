@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="sensi.html">
-<link rel="next" href="lsmc.html">
+<link rel="prev" href="volsurf.html">
+<link rel="next" href="sensi.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -109,10 +109,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.2</b> Worst-of</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.3</b> Best-of</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>2</b> Sensitivity</a><ul>
-<li class="chapter" data-level="2.1" data-path="sensi.html"><a href="sensi.html#vol-smile"><i class="fa fa-check"></i><b>2.1</b> Vol &amp; Smile</a></li>
-<li class="chapter" data-level="2.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>2.2</b> Correl</a></li>
-<li class="chapter" data-level="2.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>2.3</b> Drift</a></li>
+<li class="chapter" data-level="2" data-path="volsurf.html"><a href="volsurf.html"><i class="fa fa-check"></i><b>2</b> Volatility Surface</a><ul>
+<li class="chapter" data-level="2.1" data-path="volsurf.html"><a href="volsurf.html#implied-vol-surface"><i class="fa fa-check"></i><b>2.1</b> Implied vol surface</a></li>
+<li class="chapter" data-level="2.2" data-path="volsurf.html"><a href="volsurf.html#local-vol-surface"><i class="fa fa-check"></i><b>2.2</b> Local vol surface</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="payoff.html"><a href="payoff.html"><i class="fa fa-check"></i><b>3</b> Payoff</a><ul>
 <li class="chapter" data-level="3.1" data-path="payoff.html"><a href="payoff.html#noncallable"><i class="fa fa-check"></i><b>3.1</b> Noncallable</a><ul>
@@ -128,18 +127,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.3</b> Issuercallable</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>4</b> Longstaff Schwartz</a></li>
-<li class="chapter" data-level="5" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>5</b> Scenario</a></li>
-<li class="chapter" data-level="6" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>6</b> Quirkiness</a><ul>
-<li class="chapter" data-level="6.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>6.1</b> Inversion</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>6.1.1</b> Delta</a></li>
-<li class="chapter" data-level="6.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>6.1.2</b> Vega</a></li>
+<li class="chapter" data-level="4" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>4</b> Sensitivity</a><ul>
+<li class="chapter" data-level="4.1" data-path="sensi.html"><a href="sensi.html#vol"><i class="fa fa-check"></i><b>4.1</b> Vol</a></li>
+<li class="chapter" data-level="4.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>4.2</b> Correl</a></li>
+<li class="chapter" data-level="4.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>4.3</b> Drift</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>6.2</b> Gap</a></li>
-<li class="chapter" data-level="6.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>6.3</b> Qto</a></li>
-<li class="chapter" data-level="6.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>6.4</b> Correl</a></li>
+<li class="chapter" data-level="5" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>5</b> Longstaff Schwartz</a></li>
+<li class="chapter" data-level="6" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>6</b> Scenario</a></li>
+<li class="chapter" data-level="7" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>7</b> Quirkiness</a><ul>
+<li class="chapter" data-level="7.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>7.1</b> Inversion</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>7.1.1</b> Delta</a></li>
+<li class="chapter" data-level="7.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>7.1.2</b> Vega</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="7.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>7.2</b> Gap</a></li>
+<li class="chapter" data-level="7.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>7.3</b> Qto</a></li>
+<li class="chapter" data-level="7.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>7.4</b> Correl</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
 <li><a href="./">Unless otherwise stated,<br/>
 all information here are<br/>
@@ -164,13 +168,13 @@ derived from public sources</a></li>
             <section class="normal" id="section-">
 <div id="payoff" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Payoff</h1>
-<p>From the diffusions created in Chapter 1, we could evaluate them based on the payoff of the product. To start off we price a vanilla call options, then compare the result with the closed form Black Scholes result from Chapter 2.</p>
+<p>From the diffusions created in Chapter <a href="index.html#diffuse">1</a>, we could evaluate them based on the payoff of the product. To start off we price a vanilla call options, then compare the result with the closed-form Black Scholes solution.</p>
 <p>For a 1 year european call option strike at the money on an underlying with zero drift and 20% annualised volatility, we get a price of around 8%.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strikeK =<span class="st"> </span><span class="dv">1</span>
 diffusions =<span class="st">  </span><span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">50000</span>)
 payoffs =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, diffusions -<span class="st"> </span>strikeK)
 <span class="kw">mean</span>(payoffs)</code></pre></div>
-<pre><code>## [1] 0.07907781</code></pre>
+<pre><code>## [1] 0.08014617</code></pre>
 <p>Comparing the result to the Black Scholes solution:</p>
 <p><span class="math display">\[
     \mathrm C(\mathrm S,\mathrm t)= \mathrm N(\mathrm d_1)\mathrm S - \mathrm N(\mathrm d_2) \mathrm K \mathrm e^{-rt}
@@ -199,9 +203,23 @@ N(d_1)=N(0.1)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{0.1} \mathrm e^{-\frac{1}{2}
 N(d_2)=N(-0.1)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{-.1} \mathrm e^{-\frac{1}{2}z^2} dz = 0.4602
 \]</span></p>
 <p><span class="math display">\[
-\mathrm C(1,1)= (0.5398)(1) - (0.4602)(1) \mathrm e^{-(0)(1)} \approx 0.08
+\mathrm C(1,1)= (0.5398)(1) - (0.4602)(1) \mathrm e^{-(0)(1)} \approx 0.0796
 \]</span></p>
 <p>Good start! Here rates, dividends and repo are assumed to be zero. Also that volatility is constant. We could do better by incorporating these changes in later chapters.</p>
+<p>Up till this point we generated random normal values to mimic randomness using the function <code>rnorm</code> for monte carlo simulations. Had we decided we prefer quasi monte carlo simulations and want to use <em>low-discrepancy</em> sequences instead of random numbers because, the function <code>sobol</code> from <code>randtoolbox</code> could be used.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randtoolbox)
+aSampleSpotT_QMC =<span class="st"> </span>function(s0, r, d, q, sig, dt, nsims)
+{
+  sT =<span class="st"> </span>s0 *<span class="st"> </span><span class="kw">exp</span>((r -<span class="st"> </span>d -<span class="st"> </span>q -<span class="st"> </span><span class="fl">0.5</span> *<span class="st"> </span>sig^<span class="dv">2</span>)*dt +
+<span class="st">                   </span>sig *<span class="st"> </span><span class="kw">sobol</span>(nsims, <span class="dt">normal =</span> <span class="ot">TRUE</span>) *<span class="st"> </span><span class="kw">sqrt</span>(dt))
+  sT
+}
+
+diffusions_QMC =<span class="st">  </span><span class="kw">aSampleSpotT_QMC</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">10000</span>)
+payoffs_QMC =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, diffusions_QMC -<span class="st"> </span>strikeK)
+<span class="kw">mean</span>(payoffs_QMC)</code></pre></div>
+<pre><code>## [1] 0.07958281</code></pre>
+<p>Averaging over much lesser trajectories we expect similar results and see they are indeed very similar.</p>
 <div id="noncallable" class="section level2">
 <h2><span class="header-section-number">3.1</span> Noncallable</h2>
 <p>Non-callable payoffs are structures that have a fixed maturity. Structures that may terminate earlier than this fixed maturity are called callable payoffs.</p>
@@ -228,7 +246,7 @@ Figure 3.1: 2 separate trajectories; Left path ends below the strike and receive
 digitCpn =<span class="st"> </span><span class="fl">0.1</span>
 digitPays =<span class="st"> </span>(diffusions &gt;<span class="st"> </span>digitK)*digitCpn
 <span class="kw">mean</span>(digitPays)</code></pre></div>
-<pre><code>## [1] 0.028146</code></pre>
+<pre><code>## [1] 0.028294</code></pre>
 </div>
 <div id="pdi" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Put Down and In</h3>
@@ -240,10 +258,12 @@ pdi80Hit =<span class="st"> </span>diffusions &lt;=<span class="st"> </span>eki8
 putPays =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, pdiK -<span class="st"> </span>diffusions)
 pdi80Pays =<span class="st"> </span>putPays*<span class="kw">as.double</span>(pdi80Hit)
 <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi80Pays) <span class="co"># price of short pdi with eki = 80% and strike = 100%</span></code></pre></div>
-<pre><code>## [1] -0.04299469</code></pre>
+<pre><code>## [1] -0.04383925</code></pre>
 <p>We will use the convention of a negative premium for investor <strong>receiving</strong> the premium instead of paying the premium.</p>
 <p>If we think of the knock-in feature on a short put as <em>protection</em>, that is the option seller sold a put that will not be in the money unless the underlying has first broken the knock in barrier, then we should expect a <em>put down and in</em> with european barrier at 80% to bring less value than one with barrier at 90%. Both of which has to be cheaper than a straight put, or a put without knock-in feature.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pdi_comparison =<span class="st"> </span><span class="kw">c</span>(<span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi80Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi90Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>putPays))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pdi_comparison =<span class="st"> </span><span class="kw">c</span>(<span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi80Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi90Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>putPays))
+pdi_comparison</code></pre></div>
+<pre><code>## [1] -0.04383925 -0.07036428 -0.08051571</code></pre>
 <p>We see the seller of the different puts receives more if he sold a <em>put down and in</em> with higher knock-in barrier, or when there is no barrier (a put). Looking consistent!</p>
 <p>By the same argument, a <em>put down and in</em> with american (daily close) knock-in observation type costs more than the european type, since there are more opportunities for the product to be knocked in. We delay this comparison on observation frequency to the next section.</p>
 <p>In structured products, puts with knock-in features are very common, since they provide some protection for the investors unless the underlying has severely underperformed.</p>
@@ -261,6 +281,35 @@ Figure 3.2: 2 separate trajectories; Left: Path is not below the KI barrier, so 
 </div>
 <div id="cuo" class="section level3">
 <h3><span class="header-section-number">3.1.3</span> Call Up and Out</h3>
+<p>In a <em>call up and out</em>, if the underlying is observed to breach a certain barrier X, the call is knocked out, it no longer exists. This means even if at maturity the underlying closing much higher than the strike, there is no payout.</p>
+<p>Assuming the knock out barrier is X and strike is at the money, another way to see the value hierarchy is to say the <em>call up and out</em> is to a call spread ATM/X, what the call spread is to a vanilla call. While the call spread capped the upside to make it cheaper than the call, the <em>call up and out</em> removes the entire payoff when it reaches a certain barrier.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">callK =<span class="st"> </span><span class="dv">1</span>
+diffusions2y =<span class="st">  </span><span class="kw">aSampleSpotT_QMC</span>(<span class="dv">1</span>, <span class="fl">0.05</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">2</span>, <span class="dv">10000</span>)
+payoffs2y =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, diffusions2y -<span class="st"> </span>callK)
+<span class="kw">cat</span>(<span class="st">&quot;Price of 2y atm call: &quot;</span>, <span class="kw">mean</span>(payoffs2y))</code></pre></div>
+<pre><code>## Price of 2y atm call:  0.1780866</code></pre>
+<p>Imagine an investor buys a 2y <em>call up &amp; out</em> with american daily close style knock out observation frequency on an underlying with 20% annualised volatility, drift = 5%. The investor should expect to pay much lesser for this than a 2y vanilla call on the same underlying.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">akoBarrier =<span class="st"> </span><span class="fl">1.4</span>
+numTraj =<span class="st"> </span><span class="dv">20</span>
+yrs =<span class="st"> </span><span class="dv">2</span>
+numStepsDaily =<span class="st"> </span><span class="dv">252</span> <span class="co"># 2 years daily observation</span>
+callTraj =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, numStepsDaily*yrs*numTraj), <span class="dt">nrow =</span> numTraj)
+for (i in <span class="dv">2</span>:(numStepsDaily*yrs))
+  callTraj[,i] =<span class="st"> </span><span class="kw">aSampleSpotT</span>(callTraj[,i<span class="dv">-1</span>], <span class="fl">0.05</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, yrs/(numStepsDaily*yrs), numTraj)
+
+cuoTraj =<span class="st"> </span>callTraj
+for (i in <span class="dv">1</span>:numTraj)
+  for (j in <span class="dv">1</span>:(numStepsDaily*yrs))
+    if (callTraj[i, j] &gt;<span class="st"> </span>akoBarrier) {
+      cuoTraj[i, j:(numStepsDaily*yrs)] =<span class="st"> </span><span class="ot">NA</span>
+      break;
+    }</code></pre></div>
+<div class="figure"><span id="fig:cuo-plot"></span>
+<img src="bookdown-demo_files/figure-html/cuo-plot-1.png" alt="Left: Paths with knock out at 140%. Right: No knock out feature." width="672" />
+<p class="caption">
+Figure 3.3: Left: Paths with knock out at 140%. Right: No knock out feature.
+</p>
+</div>
 </div>
 <div id="combinations" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Combinations</h3>
@@ -281,7 +330,7 @@ Figure 3.2: 2 separate trajectories; Left: Path is not below the KI barrier, so 
 <div id="issuercallable" class="section level2">
 <h2><span class="header-section-number">3.3</span> Issuercallable</h2>
 <p>In Progress</p>
-<p>Also see Chapter <a href="lsmc.html#lsmc">4</a></p>
+<p>Also see Chapter <a href="lsmc.html#lsmc">5</a></p>
 
 </div>
 </div>
@@ -290,8 +339,8 @@ Figure 3.2: 2 separate trajectories; Left: Path is not below the KI barrier, so 
           </div>
         </div>
       </div>
-<a href="sensi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lsmc.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="volsurf.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sensi.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

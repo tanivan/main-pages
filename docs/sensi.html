@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="payoff.html">
+<link rel="prev" href="payoff.html">
+<link rel="next" href="lsmc.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -109,10 +109,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.2</b> Worst-of</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.3</b> Best-of</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>2</b> Sensitivity</a><ul>
-<li class="chapter" data-level="2.1" data-path="sensi.html"><a href="sensi.html#vol-smile"><i class="fa fa-check"></i><b>2.1</b> Vol &amp; Smile</a></li>
-<li class="chapter" data-level="2.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>2.2</b> Correl</a></li>
-<li class="chapter" data-level="2.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>2.3</b> Drift</a></li>
+<li class="chapter" data-level="2" data-path="volsurf.html"><a href="volsurf.html"><i class="fa fa-check"></i><b>2</b> Volatility Surface</a><ul>
+<li class="chapter" data-level="2.1" data-path="volsurf.html"><a href="volsurf.html#implied-vol-surface"><i class="fa fa-check"></i><b>2.1</b> Implied vol surface</a></li>
+<li class="chapter" data-level="2.2" data-path="volsurf.html"><a href="volsurf.html#local-vol-surface"><i class="fa fa-check"></i><b>2.2</b> Local vol surface</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="payoff.html"><a href="payoff.html"><i class="fa fa-check"></i><b>3</b> Payoff</a><ul>
 <li class="chapter" data-level="3.1" data-path="payoff.html"><a href="payoff.html#noncallable"><i class="fa fa-check"></i><b>3.1</b> Noncallable</a><ul>
@@ -128,18 +127,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.3</b> Issuercallable</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>4</b> Longstaff Schwartz</a></li>
-<li class="chapter" data-level="5" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>5</b> Scenario</a></li>
-<li class="chapter" data-level="6" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>6</b> Quirkiness</a><ul>
-<li class="chapter" data-level="6.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>6.1</b> Inversion</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>6.1.1</b> Delta</a></li>
-<li class="chapter" data-level="6.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>6.1.2</b> Vega</a></li>
+<li class="chapter" data-level="4" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>4</b> Sensitivity</a><ul>
+<li class="chapter" data-level="4.1" data-path="sensi.html"><a href="sensi.html#vol"><i class="fa fa-check"></i><b>4.1</b> Vol</a></li>
+<li class="chapter" data-level="4.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>4.2</b> Correl</a></li>
+<li class="chapter" data-level="4.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>4.3</b> Drift</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>6.2</b> Gap</a></li>
-<li class="chapter" data-level="6.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>6.3</b> Qto</a></li>
-<li class="chapter" data-level="6.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>6.4</b> Correl</a></li>
+<li class="chapter" data-level="5" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>5</b> Longstaff Schwartz</a></li>
+<li class="chapter" data-level="6" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>6</b> Scenario</a></li>
+<li class="chapter" data-level="7" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>7</b> Quirkiness</a><ul>
+<li class="chapter" data-level="7.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>7.1</b> Inversion</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>7.1.1</b> Delta</a></li>
+<li class="chapter" data-level="7.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>7.1.2</b> Vega</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="7.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>7.2</b> Gap</a></li>
+<li class="chapter" data-level="7.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>7.3</b> Qto</a></li>
+<li class="chapter" data-level="7.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>7.4</b> Correl</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
 <li><a href="./">Unless otherwise stated,<br/>
 all information here are<br/>
@@ -163,22 +167,32 @@ derived from public sources</a></li>
 
             <section class="normal" id="section-">
 <div id="sensi" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Sensitivity</h1>
-<p>TODO: Show general method of finite difference, using forward difference and centered difference. Use it to compute, first order greeks.</p>
-<div id="vol-smile" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vol &amp; Smile</h2>
-<p>TODO: Show that most exotic products are highly sensitive to vol surface. Term structure and skew creates the need for usage local volatility model. Generally product are vol and smile bid.</p>
-<p>TODO: Reconstruct IV surface using options prices. Plot 3d cube.</p>
-<p>TODO: Build LV surface using IV surface. Plot 3d cube. Show crazy fluctuations if IV is not smooth.</p>
-<p>TODO: Show that pricing with LV model is equal to price at constant vol.</p>
+<h1><span class="header-section-number">Chapter 4</span> Sensitivity</h1>
+<p>In Chapter <a href="payoff.html#payoff">3</a> we tried to obtain an expected price of products. In this chapter we want to understand the sensitivities of these expectations. For example, when one particular variable changes, what effect would it have on the the expectation.</p>
+<p>In finance speak, when the variable is the spot price, this sensitivity is called the Delta. Another variable of interest is the sensitivity to the volatility variable (which we called Vega). Most people are not fans of technical terms so we prefer to refer to these sensitivities as the <em>change in expected price due to a change in some variable</em>.</p>
+<p>In practice, exotic payoff generally cannot be priced by a closed-form formula, so partial differentiation is also generally not applicable when attempting to obtain the sensitivities.</p>
+<p>Here we look methods of finite difference approximation since they are easy to understand and implement. Two kinds of finite differences calculation is available, the <em>forward difference</em> and the <em>central difference</em> estimator.</p>
+<p>Suppose the variable of interest is <span class="math inline">\(\theta\)</span> and it changes by amount <span class="math inline">\(h\)</span>. The expected price at a particular value of this variable is <span class="math inline">\(F(\theta)\)</span>, the <em>forward difference</em> <span class="math inline">\(\Delta_{F}\)</span> is computed as:</p>
+<p><span class="math display">\[
+\Delta_{F} = \frac{\bar F(\theta + h) - \bar F(\theta)}{h}
+\]</span></p>
+<p>where <span class="math inline">\(\bar F(\theta + h)\)</span> is the expected value when the variable is equal to <span class="math inline">\(\theta + h\)</span>.</p>
+<p>The <em>central difference</em> <span class="math inline">\(C(\theta)\)</span> is computed as:</p>
+<p><span class="math display">\[
+\Delta_{C} = \frac{\bar C(\theta + h) - \bar C(\theta - h)}{2h}
+\]</span></p>
+<p>where <span class="math inline">\(\bar C(\theta + h)\)</span> is the expected value when the variable is equal to <span class="math inline">\(\theta + h\)</span>.</p>
+<div id="vol" class="section level2">
+<h2><span class="header-section-number">4.1</span> Vol</h2>
+<p>TODO: Show products that are vega negative.</p>
 </div>
 <div id="correl" class="section level2">
-<h2><span class="header-section-number">2.2</span> Correl</h2>
-<p>TODO: Show that most exotic bullish products are correl offer. Long worst of call = CA, Long worst of put = CA.</p>
+<h2><span class="header-section-number">4.2</span> Correl</h2>
+<p>TODO: Show bullish products that are correl offer. Long worst of call = CA, Long worst of put = CA.</p>
 </div>
 <div id="drift" class="section level2">
-<h2><span class="header-section-number">2.3</span> Drift</h2>
-<p>TODO: Show that bullish products are divs and repo bid.</p>
+<h2><span class="header-section-number">4.3</span> Drift</h2>
+<p>TODO: Showbullish products are divs and repo bid.</p>
 
 </div>
 </div>
@@ -187,8 +201,8 @@ derived from public sources</a></li>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="payoff.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="payoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lsmc.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
