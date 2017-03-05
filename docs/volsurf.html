@@ -171,13 +171,6 @@ derived from public sources</a></li>
 <p>Exotic payoffs can be very sensitive to volatility. The existence of a term and skew structure on the volatility surface implies that an underlying is regarded as having <em>different</em> volatility at different spot or time. The sensitivity to volatility means that our estimation of the price needs to incorporate the entire surface as an input.</p>
 <p>Before thinking about the implications of this, we should provide means of producing the surface. One way is to use the market data of option prices on an underlying to reconstruct the implied volatility surface. Below we demostrate how to construct the SPX implied volatility surface using option prices from CBOE.</p>
 <p>CBOE<a href="http://www.cboe.com/delayedquote/quote-table-download" class="uri">http://www.cboe.com/delayedquote/quote-table-download</a> provides downloading of delayed option quotes. If we enter SPX as the index ticker we can obtain a table that looks like this:</p>
-<pre><code>##                             Spec   PBid   PAsk CP Type
-## 1   17 Feb 500.00 (SPXW1728B500) 1864.8 1868.5  C Euro
-## 2 17 Feb 500.00 (SPXW1728B500-E) 1864.8 1868.5  C Euro
-## 3   17 Feb 600.00 (SPXW1728B600) 1764.8 1768.5  C Euro
-## 4 17 Feb 600.00 (SPXW1728B600-E) 1764.8 1768.5  C Euro
-## 5   17 Feb 700.00 (SPXW1728B700) 1664.8 1668.5  C Euro
-## 6 17 Feb 700.00 (SPXW1728B700-E) 1664.8 1668.5  C Euro</code></pre>
 <p>The data contains enough information to reproduce an implied volatility that leads to the quoted price of an option.</p>
 <div id="implied-vol-surface" class="section level2">
 <h2><span class="header-section-number">2.1</span> Implied vol surface</h2>
@@ -199,7 +192,6 @@ TTM &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class
 <span class="kw">persp</span>(s$x, TTM, s$z *<span class="st"> </span><span class="dv">100</span>, <span class="dt">col =</span> color[facetcol], <span class="dt">xlab =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Moneyness&quot;</span>,
       <span class="dt">ylab =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Expiry (Yr)&quot;</span>, <span class="dt">zlab =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Volatility (%)&quot;</span>, <span class="dt">theta =</span> <span class="dv">40</span>,
       <span class="dt">phi =</span> <span class="dv">25</span>, <span class="dt">ticktype =</span> <span class="st">&quot;detailed&quot;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/SPXdata_IV_plot-1.png" width="672" /></p>
 <p>From the plot we see the volatility is moving in the opposite direction of <em>moneyness</em>. <em>Moneyness</em> was computed as the strike price divided by the spot price. We can understand also interpret this as the implied volatility being higher when strike price is lower than the spot price.</p>
 <p>However this is not always true, there other sections of the surface (further strikes and expiries) where the curvature is differently shaped. That is, in far out (or in) of the region shown above, the shape can be upward sloping instead of downward sloping.</p>
 </div>

@@ -174,7 +174,7 @@ derived from public sources</a></li>
 diffusions =<span class="st">  </span><span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">50000</span>)
 payoffs =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, diffusions -<span class="st"> </span>strikeK)
 <span class="kw">mean</span>(payoffs)</code></pre></div>
-<pre><code>## [1] 0.07995999</code></pre>
+<pre><code>## [1] 0.08003388</code></pre>
 <p>Comparing the result to the Black Scholes solution:</p>
 <p><span class="math display">\[
     \mathrm C(\mathrm S,\mathrm t)= \mathrm N(\mathrm d_1)\mathrm S - \mathrm N(\mathrm d_2) \mathrm K \mathrm e^{-rt}
@@ -241,29 +241,29 @@ for (i in <span class="dv">2</span>:numSteps)
 Figure 3.1: 2 separate trajectories; Left path ends below the strike and receives a 10% payout, the right path does not pay any. Blue line denotes the strike barrier at 110% of initial spot.
 </p>
 </div>
-<p>Pricing such a product is always similar to that of a call option, except when the option is in the money, it pays the digit coupon instead of the performance of the underlying minus its strike. We see it cost about 3%.</p>
+<p>Pricing this payoff is similar to that of a call option, except when the option is in the money, it pays the digit coupon instead of the performance of the underlying minus its strike. We see it cost about 3%.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">digitK =<span class="st"> </span><span class="fl">1.1</span>
 digitCpn =<span class="st"> </span><span class="fl">0.1</span>
 digitPays =<span class="st"> </span>(diffusions &gt;<span class="st"> </span>digitK)*digitCpn
 <span class="kw">mean</span>(digitPays)</code></pre></div>
-<pre><code>## [1] 0.028064</code></pre>
+<pre><code>## [1] 0.028316</code></pre>
 </div>
 <div id="pdi" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Put Down and In</h3>
-<p>Like the digital <em>down and in</em> option above, a <em>put down and in</em> option knocks in when an underlying ends below a certain barrier. However, when the condition is satisfied, the put comes into existence and so the payoff is that of a vanilla put option. Therefore we need also need to know the put strike in order to determine the payoff.</p>
-<p>Let’s say we <strong>sell</strong> a 1y <em>put down and in</em> on the same underlying as before, with european (at maturity) down and in barrier 80% and strike 100%. For a change of pace we proceed to the price before visualising what a sample path and its payoff is.</p>
+<p>Like the digital <em>down and in</em> option above, a <em>put down and in</em> option knocks in when an underlying ends below a certain barrier. However, when the condition is satisfied, the put comes into existence and so the payoff is that of a vanilla put option. We therefore need to be given the put strike in order to determine the payoff.</p>
+<p>Let’s say we <strong>sell</strong> a 1y <em>put down and in</em> on the same underlying as before, with european (at maturity) down and in barrier 80% and put strike 100%. For a change of pace we proceed to the price before visualising what a sample path and its payoff is.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pdiK =<span class="st"> </span><span class="dv">1</span>
 eki80Barrier =<span class="st"> </span><span class="fl">0.8</span>
 pdi80Hit =<span class="st"> </span>diffusions &lt;=<span class="st"> </span>eki80Barrier
 putPays =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, pdiK -<span class="st"> </span>diffusions)
 pdi80Pays =<span class="st"> </span>putPays*<span class="kw">as.double</span>(pdi80Hit)
 <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi80Pays) <span class="co"># price of short pdi with eki = 80% and strike = 100%</span></code></pre></div>
-<pre><code>## [1] -0.04261739</code></pre>
+<pre><code>## [1] -0.04257575</code></pre>
 <p>We will use the convention of a negative premium for investor <strong>receiving</strong> the premium instead of paying the premium.</p>
 <p>If we think of the knock-in feature on a short put as <em>protection</em>, that is the option seller sold a put that will not be in the money unless the underlying has first broken the knock in barrier, then we should expect a <em>put down and in</em> with european barrier at 80% to bring less value than one with barrier at 90%. Both of which has to be cheaper than a straight put, or a put without knock-in feature.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pdi_comparison =<span class="st"> </span><span class="kw">c</span>(<span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi80Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>pdi90Pays), <span class="kw">mean</span>(-<span class="dv">1</span> *<span class="st"> </span>putPays))
 pdi_comparison</code></pre></div>
-<pre><code>## [1] -0.04261739 -0.06931353 -0.07973939</code></pre>
+<pre><code>## [1] -0.04257575 -0.06940946 -0.07956403</code></pre>
 <p>We see the seller of the different puts receives more if he sold a <em>put down and in</em> with higher knock-in barrier, or when there is no barrier (a put). Looking consistent!</p>
 <p>By the same argument, a <em>put down and in</em> with american (daily close) knock-in observation type costs more than the european type, since there are more opportunities for the product to be knocked in. We delay this comparison on observation frequency to the next section.</p>
 <p>In structured products, puts with knock-in features are very common, since they provide some protection for the investors unless the underlying has severely underperformed.</p>
@@ -313,6 +313,66 @@ Figure 3.3: Left: Paths with knock out at 140%. Right: No knock out feature.
 </div>
 <div id="combinations" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Combinations</h3>
+<p>Using a combinations of call, put and digital options we could put together an exotic payoff that fits investor’s risk appetite.</p>
+<p>For example, suppose an investor has a view that several underlyings will perform marginally well in the short term, but also thinks that there might be a slight chance of limited underperformance.</p>
+<p>Since the investor holds a bullish view on a basket of underlyings, it is sensible to observe the entire basket but base the performance on the worst performing underlying.</p>
+<p>We can therefore structure a payoff that pays an upside at maturity on the maximum of the worst-of call or a worst-of digit up and in. That is, <span class="math inline">\(Max( digit coupon, perf)\)</span>. If we set the digit strike to be at the money and the digit amount to be 10%, at maturity any marginal upside performance will pay 10% and may potentially lead to larger payouts if the performance exceeds 110%.</p>
+<p>To finance this upside (nothing is free) the investor would have to sell a put. We would want to add protection on the short put by adding a european down and in barrier since we expect there to be a chance of underperformance.</p>
+<table>
+<caption><span id="tab:ben-correltab">Table 3.1: </span>3 correlated underlyings</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">undl1</th>
+<th align="right">undl2</th>
+<th align="right">undl3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>undl1</td>
+<td align="right">1.0</td>
+<td align="right">0.6</td>
+<td align="right">0.6</td>
+</tr>
+<tr class="even">
+<td>undl2</td>
+<td align="right">0.6</td>
+<td align="right">1.0</td>
+<td align="right">0.6</td>
+</tr>
+<tr class="odd">
+<td>undl3</td>
+<td align="right">0.6</td>
+<td align="right">0.6</td>
+<td align="right">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>We assume there are 3 basket of underlyings with their returns well correlated, and all of them have constant annualised volatilities of 25%. Furthermore we assume their drifts are 1% per annum, that is <span class="math inline">\(r - d - q = 0.01\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+benUndls =<span class="st"> </span><span class="kw">nrow</span>(corr_ben)
+benSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly</span>
+benTraj =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, benSteps*benUndls), <span class="dt">nrow =</span> benUndls)
+for (i in <span class="dv">2</span>:benSteps)
+  benTraj[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(benTraj[,i<span class="dv">-1</span>], <span class="fl">0.03</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="dv">1</span>/benSteps, corr_ben)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">benWoTraj =<span class="st"> </span><span class="kw">apply</span>(benTraj, <span class="dv">2</span>, min)
+<span class="kw">tail</span>(benWoTraj, <span class="dv">1</span>) <span class="co"># worst performance at maturity</span></code></pre></div>
+<pre><code>## [1] 0.9590089</code></pre>
+<div class="figure"><span id="fig:benwo-traj-plot"></span>
+<img src="bookdown-demo_files/figure-html/benwo-traj-plot-1.png" alt="A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)" width="672" />
+<p class="caption">
+Figure 3.4: A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)
+</p>
+</div>
+<p>We see the worst performance at maturity is down around 4%. Because the worst performance did not end at or above the digit strike, there was no coupon paid. The call was also not in the money. However as a saving grace, the put had a knock-in protection and the barrier was not barrier since it required the worst performance to be below 80%.</p>
+<p>For clarify we include the maturity payoff diagram.</p>
+<div class="figure"><span id="fig:benwo-payoffdiag"></span>
+<img src="bookdown-demo_files/figure-html/benwo-payoffdiag-1.png" alt="Payoff diagram of the product at maturity. Worst performance ended at 96%, above the protection barrier so no downside loss" width="672" />
+<p class="caption">
+Figure 3.5: Payoff diagram of the product at maturity. Worst performance ended at 96%, above the protection barrier so no downside loss
+</p>
+</div>
 </div>
 </div>
 <div id="autocallable" class="section level2">
