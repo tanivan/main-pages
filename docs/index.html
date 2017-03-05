@@ -26,7 +26,7 @@
 <meta name="author" content="Ivan Tan">
 
 
-<meta name="date" content="2017-03-05">
+<meta name="date" content="2017-03-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -169,13 +169,13 @@ derived from public sources</a></li>
 <div id="header">
 <h1 class="title">Notes</h1>
 <h4 class="author"><em>Ivan Tan</em></h4>
-<h4 class="date"><em>2017-03-05</em></h4>
+<h4 class="date"><em>2017-03-06</em></h4>
 </div>
 <div id="diffuse" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Diffusion</h1>
-<p>In no-arbitrage pricing we one way to model a stock diffusion is using the following GBM model:</p>
+<p>In no-arbitrage pricing one way to model a stock diffusion is using the following GBM model:</p>
 <p><span class="math display">\[S_T = S_0 \cdot  e^{\Big( r-d-q -\frac{1}{2}\sigma^2 \Big)\cdot T + \sigma \sqrt{T}\cdot W_T } \]</span></p>
-<p>Given the drift and volatility parameters we can simulate sample final spot levels as such:</p>
+<p>Given the drift and volatility market parameters we can simulate sample final spot levels as such:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aSampleSpotT =<span class="st"> </span>function(s0, r, d, q, sig, dt, nsims)
 {
   sT =<span class="st"> </span>s0 *<span class="st"> </span><span class="kw">exp</span>((r -<span class="st"> </span>d -<span class="st"> </span>q -<span class="st"> </span><span class="fl">0.5</span> *<span class="st"> </span>sig^<span class="dv">2</span>)*dt +
@@ -183,15 +183,15 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  0.9434656</code></pre>
-<p>If required we could compute over several short periods to create a trajectory. Then repeat it many times to see how the diffusion is going to look like.</p>
-<p>Assuming we will drift the equity by 0% p.a., that is <span class="math inline">\(r - d - q = 0\)</span>, and it has annualised volatility of 20%, Let’s plot several trajectories or paths. See Figure <a href="index.html#fig:several-traj">1.1</a>:</p>
+<pre><code>## Spot after 1 year:  1.011507</code></pre>
+<p>If required we may also compute over several consecutive periods to generate a trajectory. If we repeat this process many times we see how the stock diffusion is going to look like.</p>
+<p>Assuming we will drift the stock by 0% p.a., that is market parameters <span class="math inline">\(r - d - q = 0\)</span>, and that it has constant annualised volatility of 20%, Let’s plot several trajectories. See Figure <a href="index.html#fig:several-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly</span>
 oneTraj =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, numSteps)
 for (i in <span class="dv">2</span>:numSteps)
   oneTraj[i] =<span class="st"> </span><span class="kw">aSampleSpotT</span>(oneTraj[i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/numSteps, <span class="dv">1</span>)
 <span class="kw">cat</span>(<span class="st">&quot;First 5 weekly close: &quot;</span>, oneTraj[<span class="dv">1</span>:<span class="dv">5</span>])</code></pre></div>
-<pre><code>## First 5 weekly close:  1 0.9998615 1.013997 1.004675 1.023341</code></pre>
+<pre><code>## First 5 weekly close:  1 1.016678 0.978485 0.9816785 0.9903895</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(oneTraj, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
      <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
@@ -213,10 +213,10 @@ Figure 1.1: Left: 1 path, Right: 30 paths
 </div>
 <div id="basket" class="section level2">
 <h2><span class="header-section-number">1.1</span> Basket</h2>
-<p>What was done above assumed each path (which can be though as one underlying by itself) is independent of another, although with the same drift and volatility. However, when attempting to simulate <strong>several</strong> underlyings, it would not be unreasonable to consider the underlyings are correlated, even with different market parameters.</p>
-<p>As an example we have a basket on three underlyings, their log returns all have pairwise correlation of 90%, see Table <a href="index.html#tab:basket-correl">1.1</a>.</p>
-<p>The (multivariate) GBM process can be extended to correlated underlyings, with their correlations preserved in the multivariate random process.</p>
-<p>One way of generating a correlated multivariate random <span class="math inline">\(W_T\)</span> vector is to left-multiply a lower triangle Cholesky decomposed correlation matrix to an uncorrelated random vector.<a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#Monte_Carlo_simulation">1</a> <a href="http://math.stackexchange.com/questions/163470/generating-correlated-random-numbers-why-does-cholesky-decomposition-work">2</a></p>
+<p>It was assumed that each path (and can also be thought as <em>each</em> underlying) is independent of one another. However, when attempting to simulate <strong>several</strong> underlyings, it would not be unreasonable to consider the underlyings are actually correlated. They are likely to also have different market parameters.</p>
+<p>As an example we have a basket on three underlyings, with log returns of each underlying having pairwise correlation of 90%. See Table <a href="index.html#tab:basket-correl">1.1</a>.</p>
+<p>The (multivariate) GBM process can be extended to underlyings that are correlated. Their correlations are preserved within the multivariate random portion of the process.</p>
+<p>One way of generating a correlated multivariate random <span class="math inline">\(W_T\)</span> vector is to left-multiply a lower triangular Cholesky decomposed matrix to an uncorrelated multivariate random vector.<a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#Monte_Carlo_simulation">1</a> <a href="http://math.stackexchange.com/questions/163470/generating-correlated-random-numbers-why-does-cholesky-decomposition-work">2</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_more =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.9</span>, <span class="fl">0.9</span>, 
                 <span class="fl">0.9</span>, <span class="fl">1.0</span>, <span class="fl">0.9</span>,
                 <span class="fl">0.9</span>, <span class="fl">0.9</span>, <span class="fl">1.0</span>), 
@@ -284,40 +284,40 @@ for (i in <span class="dv">2</span>:numSteps)
 <tr class="odd">
 <td>undl1</td>
 <td align="right">1</td>
-<td align="right">1.0018599</td>
-<td align="right">0.9845011</td>
-<td align="right">0.9836299</td>
-<td align="right">0.9960825</td>
+<td align="right">1.032174</td>
+<td align="right">1.030158</td>
+<td align="right">1.015808</td>
+<td align="right">1.067203</td>
 </tr>
 <tr class="even">
 <td>undl2</td>
 <td align="right">1</td>
-<td align="right">0.9888889</td>
-<td align="right">0.9849943</td>
-<td align="right">0.9905277</td>
-<td align="right">1.0161799</td>
+<td align="right">1.043191</td>
+<td align="right">1.025464</td>
+<td align="right">1.013256</td>
+<td align="right">1.050309</td>
 </tr>
 <tr class="odd">
 <td>undl3</td>
 <td align="right">1</td>
-<td align="right">0.9775961</td>
-<td align="right">0.9719928</td>
-<td align="right">0.9586636</td>
-<td align="right">0.9755517</td>
+<td align="right">1.051630</td>
+<td align="right">1.060456</td>
+<td align="right">1.042187</td>
+<td align="right">1.080056</td>
 </tr>
 </tbody>
 </table>
-<p>Sample paths of the underlyings. Underlying 1 in Black, Underlying 2 in Red, and Underlying 3 in Green. See Figure <a href="index.html#fig:correl-traj">1.2</a>:</p>
+<p>Sample paths of the underlyings. In black is underlying 1, in red underlying 2, in green underlying 3. See Figure <a href="index.html#fig:correl-traj">1.2</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:correl-traj"></span>
-<img src="bookdown-demo_files/figure-html/correl-traj-1.png" alt="Separate simulations of the basket trajectories" width="80%" />
+<img src="bookdown-demo_files/figure-html/correl-traj-1.png" alt="Two separate simulations of the paths of the underlyings in the basket" width="80%" />
 <p class="caption">
-Figure 1.2: Separate simulations of the basket trajectories
+Figure 1.2: Two separate simulations of the paths of the underlyings in the basket
 </p>
 </div>
 </div>
 <div id="worstof" class="section level2">
 <h2><span class="header-section-number">1.2</span> Worst-of</h2>
-<p>From a basket of underlyings, we could choose the lowest performing underlying and call it the worst-of underlying. Doing this selection over the entire tenor we can visual what a worst-of trajectory looks like.</p>
+<p>From a basket of underlyings, we could choose the lowest performing underlying and call it the worst-of underlying. Making this choice over the entire tenor of the product we can visual what a worst-of trajectory looks like.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_less =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.1</span>, 
                 <span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>,
                 <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>), 
@@ -328,17 +328,17 @@ Figure 1.2: Separate simulations of the basket trajectories
 corrTraj2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, numSteps*numUndls), <span class="dt">nrow =</span> numUndls)
 for (i in <span class="dv">2</span>:numSteps)
   corrTraj2[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj2[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.15</span>, <span class="dv">1</span>/numSteps, corr_less)</code></pre></div>
-<p>To make it obvious that a worst-of “underlying” can be different as different point of time, we choose to create a much lower correlation basket of underlyings, and reduced the annualised volatility to 15%.</p>
-<p>In this stylised result we see how the worst-of underlying can change over time.</p>
+<p>To make it obvious that a worst-of “underlying” does not have to be the same underlying at different point of time, we chose to create a much lower correlated basket of underlyings. We also chose to fix the annualised volatility of these underlyings constant at 15%.</p>
+<p>In this stylised result we see how the worst-of underlying may differ over time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 less correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9824495 0.9733751 0.9715178 0.9792299
-## [2,]    1 0.9773642 0.9500451 0.9781026 0.9937370
-## [3,]    1 1.0513659 1.0344515 1.0185185 1.0117457</code></pre>
+## [1,]    1 1.0286373 1.0189721 1.0173478 1.0173360
+## [2,]    1 1.0040870 0.9794286 0.9595675 0.9806272
+## [3,]    1 0.9832411 0.9791032 1.0225176 1.0091148</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">woTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, min)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9773642 0.9500451 0.9715178 0.9792299</code></pre>
-<p>Let’s plot a one sample of the basket trajectories, then overlap with the worst-of “underlying” (in blue). See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
+<pre><code>## [1] 1.0000000 0.9832411 0.9791032 0.9595675 0.9806272</code></pre>
+<p>Let’s plot one sample of all underlying paths. On the right we overlay the worst-of “underlying” in blue while greying out the actual underlying paths. See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
      <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
@@ -362,21 +362,21 @@ for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2))
 Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)
 </p>
 </div>
-<p>When I first started it made no sense why anyone would want to buy a call option that tracks the worst performance. Turns out it meant for investors who have a bullish view on a basket of underlyings. Tracking on the worst-of is <em>a lot</em> cheaper than buying a call that is based of the average performance. As we’ll see in Chapter <a href="payoff.html#payoff">3</a>, this makes possible some interesting exotic payoffs.</p>
+<p>A relevant question is why anyone would want to buy a call option that tracks the worst performance instead of the average performance, since the alternative is very likely to pay more at maturity. A sensitive answer is that if the investor has a bullish view on the entire basket, buying a worst-of call option is <em>a lot</em> more affordable than buying a call that is based on the average performance. As we’ll see in Chapter <a href="payoff.html#payoff">3</a>, this makes possible some interesting exotic payoffs.</p>
 </div>
 <div id="bestof" class="section level2">
 <h2><span class="header-section-number">1.3</span> Best-of</h2>
-<p>Having seen a worst-of <em>underlying</em>, there is no reason why we cannot have a best-of version. This time we select the best performing underlying instead of the worst.</p>
-<p>Unless the worst-of call, the best-of call is more expensive than basing of an average performance of the basket of underlying. However if you have a bearish view, buying a put or shorting a call is now a lot more attractive.</p>
+<p>Having seen a worst-of <em>underlying</em>, there is no reason why we cannot have a best-of version.</p>
+<p>Unlike the worst-of call option, a best-of call is more expensive than the average of call. However, if you have a bearish view, buying a best-of put is much more affordable. Likewise, <em>selling</em> a best-of call brings the investor much more premium.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9824495 0.9733751 0.9715178 0.9792299
-## [2,]    1 0.9773642 0.9500451 0.9781026 0.9937370
-## [3,]    1 1.0513659 1.0344515 1.0185185 1.0117457</code></pre>
+## [1,]    1 1.0286373 1.0189721 1.0173478 1.0173360
+## [2,]    1 1.0040870 0.9794286 0.9595675 0.9806272
+## [3,]    1 0.9832411 0.9791032 1.0225176 1.0091148</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, max)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9773642 0.9500451 0.9715178 0.9792299</code></pre>
-<p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
+<pre><code>## [1] 1.0000000 0.9832411 0.9791032 0.9595675 0.9806272</code></pre>
+<p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end of the product tenor. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
      <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
@@ -400,7 +400,7 @@ for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2))
 Figure 1.4: A basket of 3 underlyings (in grey) and the best-of underlying (in blue)
 </p>
 </div>
-<p>And with many repeated simulations of the 3 underlyings. On the right we also overlay in blue the best-of “underlying” for each simulation. Notice how this “underlying” drifts differently compared to the 3 actual underlyings (in red, blue and black).</p>
+<p>Now we repeat the over many simulations of the 3 underlyings paths. On the right we overlay in blue the best-of “underlying” of each simulation.</p>
 <p><img src="bookdown-demo_files/figure-html/bo-traj-simplot-1.png" width="672" /></p>
 
 </div>

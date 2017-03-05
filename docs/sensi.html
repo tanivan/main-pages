@@ -26,7 +26,7 @@
 <meta name="author" content="Ivan Tan">
 
 
-<meta name="date" content="2017-03-05">
+<meta name="date" content="2017-03-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -168,31 +168,31 @@ derived from public sources</a></li>
             <section class="normal" id="section-">
 <div id="sensi" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Sensitivity</h1>
-<p>In Chapter <a href="payoff.html#payoff">3</a> we tried to obtain an expected price of products. In this chapter we want to understand the sensitivities of these expectations. For example, when one particular variable changes, what effect would it have on the the expectation.</p>
-<p>In finance speak, when the variable is the spot price, this sensitivity is called the Delta. Another variable of interest is the sensitivity to the volatility variable (which we called Vega). Most people are not fans of technical terms so we prefer to refer to these sensitivities as the <em>change in expected price due to a change in some variable</em>.</p>
-<p>In practice, exotic payoff generally cannot be priced by a closed-form formula, so partial differentiation is also generally not applicable when attempting to obtain the sensitivities.</p>
-<p>Here we look methods of finite difference approximation since they are easy to understand and implement. Two kinds of finite differences calculation is available, the <em>forward difference</em> and the <em>central difference</em> estimator.</p>
-<p>Suppose the variable of interest is <span class="math inline">\(\theta\)</span> and it changes by amount <span class="math inline">\(h\)</span>. The expected price at a particular value of this variable is <span class="math inline">\(F(\theta)\)</span>, the <em>forward difference</em> <span class="math inline">\(\Delta_{F}\)</span> is computed as:</p>
+<p>In Chapter <a href="payoff.html#payoff">3</a> we tried to obtain an expected price of products. In this chapter we want to understand the sensitivities of these expectations. For example, when one particular variable changes, what is the effect it would have on the expectation.</p>
+<p>In finance speak, when the variable is the spot price, this sensitivity is called the Delta. Another variable of interest is the sensitivity to volatility (which is called Vega). Some people are not fans of technical terms so we prefer to call the sensitivities the <em>change in expected price due to a change in some variable</em>.</p>
+<p>In practice, exotic payoffs cannot be solved by closed-form formulas, so the method of partial differentiation is generally not applicable in obtaining the sensitivities.</p>
+<p>Here we look at methods of finite difference approximation since they are easy to understand and implement. Two types of finite differencing are available, the <em>forward difference</em> and the <em>central difference</em> approximation.</p>
+<p>Suppose the variable of interest is <span class="math inline">\(\theta\)</span> and it changes by amount <span class="math inline">\(h\)</span>. The expected price at a particular value of this variable can be represented as <span class="math inline">\(F(\theta)\)</span>, the <em>forward difference</em> <span class="math inline">\(\Delta_{F}\)</span> is computed as such:</p>
 <p><span class="math display">\[
 \Delta_{F} = \frac{\bar F(\theta + h) - \bar F(\theta)}{h}
 \]</span></p>
-<p>where <span class="math inline">\(\bar F(\theta + h)\)</span> is the expected value when the variable is equal to <span class="math inline">\(\theta + h\)</span>.</p>
-<p>The <em>central difference</em> <span class="math inline">\(C(\theta)\)</span> is computed as:</p>
+<p>where <span class="math inline">\(\bar F(\theta + h)\)</span> is the expected price of the payoff when the variable is <span class="math inline">\(\theta + h\)</span>.</p>
+<p>The <em>central difference</em> <span class="math inline">\(C(\theta)\)</span> is computed as such:</p>
 <p><span class="math display">\[
 \Delta_{C} = \frac{\bar C(\theta + h) - \bar C(\theta - h)}{2h}
 \]</span></p>
-<p>where <span class="math inline">\(\bar C(\theta + h)\)</span> is the expected value when the variable is equal to <span class="math inline">\(\theta + h\)</span>.</p>
+<p>where <span class="math inline">\(\bar C(\theta + h)\)</span> is the expected price of the payoff when the variable is to <span class="math inline">\(\theta + h\)</span>.</p>
 <div id="vol" class="section level2">
 <h2><span class="header-section-number">4.1</span> Vol</h2>
-<p>TODO: Show products that are vega negative.</p>
+<p>TODO</p>
 </div>
 <div id="correl" class="section level2">
 <h2><span class="header-section-number">4.2</span> Correl</h2>
-<p>TODO: Show bullish products that are correl offer. Long worst of call = CA, Long worst of put = CA.</p>
+<p>TODO</p>
 </div>
 <div id="drift" class="section level2">
 <h2><span class="header-section-number">4.3</span> Drift</h2>
-<p>TODO: Showbullish products are divs and repo bid.</p>
+<p>TODO</p>
 
 </div>
 </div>
