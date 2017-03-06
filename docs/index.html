@@ -26,7 +26,7 @@
 <meta name="author" content="Ivan Tan">
 
 
-<meta name="date" content="2017-03-06">
+<meta name="date" content="2017-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -121,9 +121,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1.4" data-path="payoff.html"><a href="payoff.html#combinations"><i class="fa fa-check"></i><b>3.1.4</b> Combinations</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="payoff.html"><a href="payoff.html#autocallable"><i class="fa fa-check"></i><b>3.2</b> Autocallable</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="payoff.html"><a href="payoff.html#apollon"><i class="fa fa-check"></i><b>3.2.1</b> Snowball</a></li>
-<li class="chapter" data-level="3.2.2" data-path="payoff.html"><a href="payoff.html#phoenix"><i class="fa fa-check"></i><b>3.2.2</b> Phoenix</a></li>
-<li class="chapter" data-level="3.2.3" data-path="payoff.html"><a href="payoff.html#fcn"><i class="fa fa-check"></i><b>3.2.3</b> Fixed Coupons Notes</a></li>
+<li class="chapter" data-level="3.2.1" data-path="payoff.html"><a href="payoff.html#fcn"><i class="fa fa-check"></i><b>3.2.1</b> Fixed Coupon</a></li>
+<li class="chapter" data-level="3.2.2" data-path="payoff.html"><a href="payoff.html#apollon"><i class="fa fa-check"></i><b>3.2.2</b> Snowball</a></li>
+<li class="chapter" data-level="3.2.3" data-path="payoff.html"><a href="payoff.html#phoenix"><i class="fa fa-check"></i><b>3.2.3</b> Phoenix</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.3</b> Issuercallable</a></li>
 </ul></li>
@@ -169,7 +169,7 @@ derived from public sources</a></li>
 <div id="header">
 <h1 class="title">Notes</h1>
 <h4 class="author"><em>Ivan Tan</em></h4>
-<h4 class="date"><em>2017-03-06</em></h4>
+<h4 class="date"><em>2017-03-07</em></h4>
 </div>
 <div id="diffuse" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Diffusion</h1>
@@ -183,7 +183,7 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  1.058742</code></pre>
+<pre><code>## Spot after 1 year:  1.227238</code></pre>
 <p>If required we may also compute over several consecutive periods to generate a trajectory. If we repeat this process many times we see how the stock diffusion is going to look like.</p>
 <p>Assuming we will drift the stock by 0% p.a., that is market parameters <span class="math inline">\(r - d - q = 0\)</span>, and that it has constant annualised volatility of 20%, Let’s plot several trajectories. See Figure <a href="index.html#fig:several-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly</span>
@@ -191,7 +191,7 @@ oneTraj =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1
 for (i in <span class="dv">2</span>:numSteps)
   oneTraj[i] =<span class="st"> </span><span class="kw">aSampleSpotT</span>(oneTraj[i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/numSteps, <span class="dv">1</span>)
 <span class="kw">cat</span>(<span class="st">&quot;First 5 weekly close: &quot;</span>, oneTraj[<span class="dv">1</span>:<span class="dv">5</span>])</code></pre></div>
-<pre><code>## First 5 weekly close:  1 0.9732981 0.9148824 0.9325205 0.9330477</code></pre>
+<pre><code>## First 5 weekly close:  1 0.9979712 0.9938938 1.000732 0.9860534</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(oneTraj, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
      <span class="dt">axes =</span> F, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,
@@ -284,26 +284,26 @@ for (i in <span class="dv">2</span>:numSteps)
 <tr class="odd">
 <td>undl1</td>
 <td align="right">1</td>
-<td align="right">0.9976845</td>
-<td align="right">0.9944772</td>
-<td align="right">1.0154737</td>
-<td align="right">0.9759374</td>
+<td align="right">0.9884012</td>
+<td align="right">0.9945701</td>
+<td align="right">1.0008157</td>
+<td align="right">0.9499782</td>
 </tr>
 <tr class="even">
 <td>undl2</td>
 <td align="right">1</td>
-<td align="right">0.9856863</td>
-<td align="right">0.9936068</td>
-<td align="right">1.0187560</td>
-<td align="right">0.9845475</td>
+<td align="right">0.9733947</td>
+<td align="right">0.9660142</td>
+<td align="right">0.9644417</td>
+<td align="right">0.9116083</td>
 </tr>
 <tr class="odd">
 <td>undl3</td>
 <td align="right">1</td>
-<td align="right">0.9905005</td>
-<td align="right">0.9772523</td>
-<td align="right">0.9880967</td>
-<td align="right">0.9559537</td>
+<td align="right">0.9681131</td>
+<td align="right">0.9721311</td>
+<td align="right">0.9676015</td>
+<td align="right">0.9070814</td>
 </tr>
 </tbody>
 </table>
@@ -332,12 +332,12 @@ for (i in <span class="dv">2</span>:numSteps)
 <p>In this stylised result we see how the worst-of underlying may differ over time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 less correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9579938 0.9608714 0.9303943 0.9096714
-## [2,]    1 1.0023613 1.0167211 1.0334814 1.0329243
-## [3,]    1 0.9628227 0.9567382 0.9415245 0.9399668</code></pre>
+## [1,]    1 1.0533054 1.0538027 1.0191959 1.0132602
+## [2,]    1 0.9830126 0.9931209 0.9652524 0.9637003
+## [3,]    1 1.0100581 1.0082731 1.0377573 1.0424124</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">woTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, min)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9579938 0.9567382 0.9303943 0.9096714</code></pre>
+<pre><code>## [1] 1.0000000 0.9830126 0.9931209 0.9652524 0.9637003</code></pre>
 <p>Let’s plot one sample of all underlying paths. On the right we overlay the worst-of “underlying” in blue while greying out the actual underlying paths. See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
@@ -370,12 +370,12 @@ Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in 
 <p>Unlike the worst-of call option, a best-of call is more expensive than the average of call. However, if you have a bearish view, buying a best-of put is much more affordable. Likewise, <em>selling</em> a best-of call brings the investor much more premium.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9579938 0.9608714 0.9303943 0.9096714
-## [2,]    1 1.0023613 1.0167211 1.0334814 1.0329243
-## [3,]    1 0.9628227 0.9567382 0.9415245 0.9399668</code></pre>
+## [1,]    1 1.0533054 1.0538027 1.0191959 1.0132602
+## [2,]    1 0.9830126 0.9931209 0.9652524 0.9637003
+## [3,]    1 1.0100581 1.0082731 1.0377573 1.0424124</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, max)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9579938 0.9567382 0.9303943 0.9096714</code></pre>
+<pre><code>## [1] 1.0000000 0.9830126 0.9931209 0.9652524 0.9637003</code></pre>
 <p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end of the product tenor. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
