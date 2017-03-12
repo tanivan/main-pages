@@ -180,7 +180,7 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  0.9034631</code></pre>
+<pre><code>## Spot after 1 year:  0.9406981</code></pre>
 <p>If required it is also possible to iterate over several consecutive periods to generate a path. For example, instead of sampling the spot after 1 year, we sample the spot after 1 week, then use the spot at week 1 to sample the spot at week 2, and so on until we arrive at the final observation as required. By repeatedly and independently generating many such paths we can visualise how the stock diffusion looks like.</p>
 <p>Assume the stock drifts at 0% per annum, i.e. <span class="math inline">\(r - d - q = 0\)</span>, and the stock has constant volatility of 20% per annum, we plot several paths or trajectories. The initial spot price is normalised to 1. Each trajectory below consist of 52 consecutive weekly observations. See Figure <a href="index.html#fig:manyPath-compute-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly obs</span>
@@ -201,10 +201,10 @@ for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
 <tbody>
 <tr class="odd">
 <td>Spot price</td>
-<td align="right">0.9654728</td>
-<td align="right">0.9581902</td>
-<td align="right">0.9697437</td>
-<td align="right">0.9637569</td>
+<td align="right">1.010354</td>
+<td align="right">1.008503</td>
+<td align="right">1.027878</td>
+<td align="right">1.046089</td>
 </tr>
 </tbody>
 </table>
@@ -287,41 +287,37 @@ corrTraj =<span class="st"> </span><span class="kw">matrix</span>(<span class="k
 for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
   corrTraj[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/nSteps, corrHigh)</code></pre></div>
 <table>
-<caption><span id="tab:manyTrajCorrelated-tab">Table 1.3: </span>First 5 weekly close of 3 correlated undls</caption>
+<caption><span id="tab:manyTrajCorrelated-tab">Table 1.3: </span>First 4 weekly close of 3 correlated undls</caption>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">wk1</th>
-<th align="right">wk2</th>
-<th align="right">wk3</th>
-<th align="right">wk4</th>
-<th align="right">wk5</th>
+<th align="right">Week 1</th>
+<th align="right">Week 2</th>
+<th align="right">Week 3</th>
+<th align="right">Week 4</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>undl1</td>
-<td align="right">1</td>
-<td align="right">0.9826109</td>
-<td align="right">0.9758952</td>
-<td align="right">0.9286175</td>
-<td align="right">0.8947027</td>
+<td>Undl 1</td>
+<td align="right">1.0148149</td>
+<td align="right">1.051679</td>
+<td align="right">1.055015</td>
+<td align="right">0.9982919</td>
 </tr>
 <tr class="even">
-<td>undl2</td>
-<td align="right">1</td>
-<td align="right">0.9950613</td>
-<td align="right">0.9939981</td>
-<td align="right">0.9802210</td>
-<td align="right">0.9563047</td>
+<td>Undl 2</td>
+<td align="right">0.9873323</td>
+<td align="right">1.018286</td>
+<td align="right">1.025675</td>
+<td align="right">0.9778886</td>
 </tr>
 <tr class="odd">
-<td>undl3</td>
-<td align="right">1</td>
-<td align="right">0.9798993</td>
-<td align="right">0.9889713</td>
-<td align="right">0.9603761</td>
-<td align="right">0.9390326</td>
+<td>Undl 3</td>
+<td align="right">0.9844207</td>
+<td align="right">1.040822</td>
+<td align="right">1.033495</td>
+<td align="right">0.9804207</td>
 </tr>
 </tbody>
 </table>
@@ -339,22 +335,22 @@ Figure 1.2: Two separate simulations of the paths of the underlyings in the bask
                 <span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>,
                 <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>), 
               <span class="dt">nrow =</span> <span class="dv">3</span>,
-              <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;undl1&quot;</span>, <span class="st">&quot;undl2&quot;</span>, <span class="st">&quot;undl3&quot;</span>), 
-                              <span class="kw">c</span>(<span class="st">&quot;undl1&quot;</span>, <span class="st">&quot;undl2&quot;</span>, <span class="st">&quot;undl3&quot;</span>)))
+              <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Undl 1&quot;</span>, <span class="st">&quot;Undl 2&quot;</span>, <span class="st">&quot;Undl 3&quot;</span>), 
+                              <span class="kw">c</span>(<span class="st">&quot;Undl 1&quot;</span>, <span class="st">&quot;Undl 2&quot;</span>, <span class="st">&quot;Undl 3&quot;</span>)))
 
 corrTraj2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, (nSteps<span class="dv">+1</span>)*nUndls), <span class="dt">nrow =</span> nUndls)
 for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
-  corrTraj2[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj2[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.15</span>, <span class="dv">1</span>/nSteps, corrLow)</code></pre></div>
-<p>To make it obvious that a worst-of “underlying” does not have to be the same underlying at different point of time, we chose to create a much lower correlated basket of underlyings. We also chose to fix the annualised volatility of these underlyings constant at 15%.</p>
+  corrTraj2[,i] =<span class="st"> </span><span class="kw">corrSpot</span>(corrTraj2[,i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.40</span>, <span class="dv">1</span>/nSteps, corrLow)</code></pre></div>
+<p>To make it obvious that a worst-of “underlying” does not have to be the same underlying at different point of time, we chose to create a much lower correlated basket of underlyings. We also chose to fix the annualised volatility of these underlyings constant at 40%.</p>
 <p>In this stylised result we see how the worst-of underlying may differ over time.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 less correlated undls</span></code></pre></div>
-<pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9873822 0.9956225 0.9754487 1.0111310
-## [2,]    1 1.0051351 1.0086736 0.9905850 0.9830392
-## [3,]    1 0.9696188 0.9889384 0.9949613 1.0137290</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">2</span>:<span class="dv">5</span>]) <span class="co"># First 4 weekly close of 3 less correlated undls</span></code></pre></div>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]
+## [1,] 1.1135548 1.0202253 0.9835093 1.0333351
+## [2,] 1.0472104 1.0016814 0.9452105 0.9230915
+## [3,] 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">woTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, min)
-<span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9696188 0.9889384 0.9754487 0.9830392</code></pre>
+<span class="kw">print</span>(woTraj[<span class="dv">2</span>:<span class="dv">5</span>]) <span class="co"># First 4 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
+<pre><code>## [1] 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
 <p>Let’s plot one sample of all underlying paths. On the right we overlay the worst-of “underlying” in blue while greying out the actual underlying paths. See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
@@ -387,12 +383,12 @@ Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in 
 <p>Unlike the worst-of call option, a best-of call is more expensive than the average of call. However, if you have a bearish view, buying a best-of put is much more affordable. Likewise, <em>selling</em> a best-of call brings the investor much more premium.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 0.9873822 0.9956225 0.9754487 1.0111310
-## [2,]    1 1.0051351 1.0086736 0.9905850 0.9830392
-## [3,]    1 0.9696188 0.9889384 0.9949613 1.0137290</code></pre>
+## [1,]    1 1.1135548 1.0202253 0.9835093 1.0333351
+## [2,]    1 1.0472104 1.0016814 0.9452105 0.9230915
+## [3,]    1 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, max)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9696188 0.9889384 0.9754487 0.9830392</code></pre>
+<pre><code>## [1] 1.0000000 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
 <p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end of the product tenor. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
