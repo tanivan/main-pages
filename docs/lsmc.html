@@ -23,10 +23,9 @@
   
   
 
-<meta name="author" content="Ivan Tan">
 
 
-<meta name="date" content="2017-03-07">
+<meta name="date" content="2017-03-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +33,7 @@
   
   
 <link rel="prev" href="sensi.html">
-<link rel="next" href="scen.html">
+<link rel="next" href="quirk.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -101,17 +100,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Notes</a></li>
+<li><a href="./">Unless otherwise stated,<br/>
+all information here are<br/>
+derived from public sources</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Diffusion</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#basket"><i class="fa fa-check"></i><b>1.1</b> Basket</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.2</b> Worst-of</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.3</b> Best-of</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#basket"><i class="fa fa-check"></i><b>1.1</b> Basket</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#worstof"><i class="fa fa-check"></i><b>1.1.1</b> Worst-of</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#bestof"><i class="fa fa-check"></i><b>1.1.2</b> Best-of</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="volsurf.html"><a href="volsurf.html"><i class="fa fa-check"></i><b>2</b> Volatility Surface</a><ul>
-<li class="chapter" data-level="2.1" data-path="volsurf.html"><a href="volsurf.html#implied-vol-surface"><i class="fa fa-check"></i><b>2.1</b> Implied vol surface</a></li>
-<li class="chapter" data-level="2.2" data-path="volsurf.html"><a href="volsurf.html#local-vol-surface"><i class="fa fa-check"></i><b>2.2</b> Local vol surface</a></li>
+<li class="chapter" data-level="2.1" data-path="volsurf.html"><a href="volsurf.html#implied-vol"><i class="fa fa-check"></i><b>2.1</b> Implied Vol</a></li>
+<li class="chapter" data-level="2.2" data-path="volsurf.html"><a href="volsurf.html#local-vol"><i class="fa fa-check"></i><b>2.2</b> Local Vol</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="payoff.html"><a href="payoff.html"><i class="fa fa-check"></i><b>3</b> Payoff</a><ul>
 <li class="chapter" data-level="3.1" data-path="payoff.html"><a href="payoff.html#noncallable"><i class="fa fa-check"></i><b>3.1</b> Noncallable</a><ul>
@@ -120,34 +122,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1.3" data-path="payoff.html"><a href="payoff.html#cuo"><i class="fa fa-check"></i><b>3.1.3</b> Call Up and Out</a></li>
 <li class="chapter" data-level="3.1.4" data-path="payoff.html"><a href="payoff.html#combinations"><i class="fa fa-check"></i><b>3.1.4</b> Combinations</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="payoff.html"><a href="payoff.html#autocallable"><i class="fa fa-check"></i><b>3.2</b> Autocallable</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="payoff.html"><a href="payoff.html#fcn"><i class="fa fa-check"></i><b>3.2.1</b> Fixed Coupon</a></li>
-<li class="chapter" data-level="3.2.2" data-path="payoff.html"><a href="payoff.html#apollon"><i class="fa fa-check"></i><b>3.2.2</b> Snowball</a></li>
-<li class="chapter" data-level="3.2.3" data-path="payoff.html"><a href="payoff.html#phoenix"><i class="fa fa-check"></i><b>3.2.3</b> Phoenix</a></li>
+<li class="chapter" data-level="3.2" data-path="payoff.html"><a href="payoff.html#callable"><i class="fa fa-check"></i><b>3.2</b> Callable</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="payoff.html"><a href="payoff.html#fcn"><i class="fa fa-check"></i><b>3.2.1</b> Fixed Coupon Autocallable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="payoff.html"><a href="payoff.html#apollon"><i class="fa fa-check"></i><b>3.2.2</b> Snowball Coupon Autocallable</a></li>
+<li class="chapter" data-level="3.2.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.2.3</b> Issuercallable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="payoff.html"><a href="payoff.html#issuercallable"><i class="fa fa-check"></i><b>3.3</b> Issuercallable</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="sensi.html"><a href="sensi.html"><i class="fa fa-check"></i><b>4</b> Sensitivity</a><ul>
 <li class="chapter" data-level="4.1" data-path="sensi.html"><a href="sensi.html#vol"><i class="fa fa-check"></i><b>4.1</b> Vol</a></li>
-<li class="chapter" data-level="4.2" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>4.2</b> Correl</a></li>
-<li class="chapter" data-level="4.3" data-path="sensi.html"><a href="sensi.html#drift"><i class="fa fa-check"></i><b>4.3</b> Drift</a></li>
+<li class="chapter" data-level="4.2" data-path="sensi.html"><a href="sensi.html#spot"><i class="fa fa-check"></i><b>4.2</b> Spot</a></li>
+<li class="chapter" data-level="4.3" data-path="sensi.html"><a href="sensi.html#correl"><i class="fa fa-check"></i><b>4.3</b> Correl</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="lsmc.html"><a href="lsmc.html"><i class="fa fa-check"></i><b>5</b> Longstaff Schwartz</a></li>
-<li class="chapter" data-level="6" data-path="scen.html"><a href="scen.html"><i class="fa fa-check"></i><b>6</b> Scenario</a></li>
-<li class="chapter" data-level="7" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>7</b> Quirkiness</a><ul>
-<li class="chapter" data-level="7.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>7.1</b> Inversion</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>7.1.1</b> Delta</a></li>
-<li class="chapter" data-level="7.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>7.1.2</b> Vega</a></li>
+<li class="chapter" data-level="6" data-path="quirk.html"><a href="quirk.html"><i class="fa fa-check"></i><b>6</b> Quirkiness</a><ul>
+<li class="chapter" data-level="6.1" data-path="quirk.html"><a href="quirk.html#inversion"><i class="fa fa-check"></i><b>6.1</b> Inversion</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="quirk.html"><a href="quirk.html#delta"><i class="fa fa-check"></i><b>6.1.1</b> Delta</a></li>
+<li class="chapter" data-level="6.1.2" data-path="quirk.html"><a href="quirk.html#vega"><i class="fa fa-check"></i><b>6.1.2</b> Vega</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>7.2</b> Gap</a></li>
-<li class="chapter" data-level="7.3" data-path="quirk.html"><a href="quirk.html#qto"><i class="fa fa-check"></i><b>7.3</b> Qto</a></li>
-<li class="chapter" data-level="7.4" data-path="quirk.html"><a href="quirk.html#correl-1"><i class="fa fa-check"></i><b>7.4</b> Correl</a></li>
+<li class="chapter" data-level="6.2" data-path="quirk.html"><a href="quirk.html#gap"><i class="fa fa-check"></i><b>6.2</b> Gap</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="chapter" data-level="7" data-path="refer.html"><a href="refer.html"><i class="fa fa-check"></i><b>7</b> References</a><ul>
+<li class="chapter" data-level="7.1" data-path="refer.html"><a href="refer.html#other-projects"><i class="fa fa-check"></i><b>7.1</b> Other projects</a></li>
+</ul></li>
 <li class="divider"></li>
-<li><a href="./">Unless otherwise stated,<br/>
-all information here are<br/>
-derived from public sources</a></li>
+<li><a href="./">contact@ivanwj.com</a></li>
 
 </ul>
 
@@ -178,7 +176,7 @@ derived from public sources</a></li>
         </div>
       </div>
 <a href="sensi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scen.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="quirk.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -206,9 +204,10 @@ gitbook.start({
 "size": 2
 },
 "edit": null,
-"download": null,
+"download": ["book.pdf", "book.mobi"],
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"scroll_highlight": true
 }
 });
 });
