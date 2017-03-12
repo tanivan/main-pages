@@ -180,12 +180,12 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  0.9985481</code></pre>
+<pre><code>## Spot after 1 year:  0.9034631</code></pre>
 <p>If required it is also possible to iterate over several consecutive periods to generate a path. For example, instead of sampling the spot after 1 year, we sample the spot after 1 week, then use the spot at week 1 to sample the spot at week 2, and so on until we arrive at the final observation as required. By repeatedly and independently generating many such paths we can visualise how the stock diffusion looks like.</p>
 <p>Assume the stock drifts at 0% per annum, i.e. <span class="math inline">\(r - d - q = 0\)</span>, and the stock has constant volatility of 20% per annum, we plot several paths or trajectories. The initial spot price is normalised to 1. Each trajectory below consist of 52 consecutive weekly observations. See Figure <a href="index.html#fig:manyPath-compute-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly obs</span>
 aPath =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, nSteps<span class="dv">+1</span>) <span class="co"># initial spot is 1 </span>
-for (i in <span class="dv">2</span>:nSteps<span class="dv">+1</span>)
+for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
   aPath[i] =<span class="st"> </span><span class="kw">aSampleSpotT</span>(aPath[i<span class="dv">-1</span>], <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>/nSteps, <span class="dv">1</span>)</code></pre></div>
 <table>
 <caption><span id="tab:onePath-compute-table">Table 1.1: </span>First 4 weekly close</caption>
@@ -201,10 +201,10 @@ for (i in <span class="dv">2</span>:nSteps<span class="dv">+1</span>)
 <tbody>
 <tr class="odd">
 <td>Spot price</td>
-<td align="right">1</td>
-<td align="right">0.9671919</td>
-<td align="right">0.9546218</td>
-<td align="right">0.9424516</td>
+<td align="right">0.9654728</td>
+<td align="right">0.9581902</td>
+<td align="right">0.9697437</td>
+<td align="right">0.9637569</td>
 </tr>
 </tbody>
 </table>
@@ -302,26 +302,26 @@ for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
 <tr class="odd">
 <td>undl1</td>
 <td align="right">1</td>
-<td align="right">1.018330</td>
-<td align="right">0.9628113</td>
-<td align="right">0.9390624</td>
-<td align="right">0.9861838</td>
+<td align="right">0.9826109</td>
+<td align="right">0.9758952</td>
+<td align="right">0.9286175</td>
+<td align="right">0.8947027</td>
 </tr>
 <tr class="even">
 <td>undl2</td>
 <td align="right">1</td>
-<td align="right">1.018755</td>
-<td align="right">0.9639712</td>
-<td align="right">0.9508225</td>
-<td align="right">0.9904997</td>
+<td align="right">0.9950613</td>
+<td align="right">0.9939981</td>
+<td align="right">0.9802210</td>
+<td align="right">0.9563047</td>
 </tr>
 <tr class="odd">
 <td>undl3</td>
 <td align="right">1</td>
-<td align="right">1.027281</td>
-<td align="right">0.9619545</td>
-<td align="right">0.9584081</td>
-<td align="right">1.0028655</td>
+<td align="right">0.9798993</td>
+<td align="right">0.9889713</td>
+<td align="right">0.9603761</td>
+<td align="right">0.9390326</td>
 </tr>
 </tbody>
 </table>
@@ -379,7 +379,7 @@ for (i in <span class="dv">2</span>:<span class="kw">nrow</span>(corrTraj2))
 Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in blue)
 </p>
 </div>
-<p>A relevant question is why anyone would want to buy a call option that tracks the worst performance instead of the average performance, since the alternative is very likely to pay more at maturity. A sensitive answer is that if the investor has a bullish view on the entire basket, buying a worst-of call option is <em>a lot</em> more affordable than buying a call that is based on the average performance. As we’ll see in Chapter <a href="payoff.html#payoff">3</a>, this makes possible some interesting exotic payoffs.</p>
+<p>A relevant question is why anyone would want to buy a call option that tracks the worst performance instead of the average performance, since the alternative is very likely to pay more at maturity. The sensible answer is that if the investor has a bullish view on the entire basket, buying a worst-of call option is <em>a lot</em> more affordable than buying a call that is based on the average performance. As we’ll see in Chapter <a href="payoff.html#payoff">3</a>, this makes possible some interesting exotic payoffs.</p>
 </div>
 <div id="bestof" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Best-of</h3>
