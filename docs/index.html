@@ -25,7 +25,7 @@
 
 
 
-<meta name="date" content="2017-03-13">
+<meta name="date" content="2017-03-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -100,9 +100,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Unless otherwise stated,<br/>
-all information here are<br/>
-derived from public sources</a></li>
+<li><a href="./"><font color="SLATEGRAY"><strong>UNLESS OTHERWISE STATED,<br/>
+ALL INFORMATION HERE ARE<br/>
+FROM PUBLIC SOURCES</strong></font></a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
@@ -166,7 +166,7 @@ derived from public sources</a></li>
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Notes</h1>
-<h4 class="date"><em>2017-03-13</em></h4>
+<h4 class="date"><em>2017-03-14</em></h4>
 </div>
 <div id="preface" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Preface</h1>
@@ -180,7 +180,7 @@ derived from public sources</a></li>
   sT
 }
 <span class="kw">cat</span>(<span class="st">&quot;Spot after 1 year: &quot;</span>, <span class="kw">aSampleSpotT</span>(<span class="dv">1</span>, <span class="fl">0.04</span>, <span class="fl">0.01</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
-<pre><code>## Spot after 1 year:  0.9406981</code></pre>
+<pre><code>## Spot after 1 year:  0.9821138</code></pre>
 <p>If required it is also possible to iterate over several consecutive periods to generate a path. For example, instead of sampling the spot after 1 year, we sample the spot after 1 week, then use the spot at week 1 to sample the spot at week 2, and so on until we arrive at the final observation as required. By repeatedly and independently generating many such paths we can visualise how the stock diffusion looks like.</p>
 <p>Assume the stock drifts at 0% per annum, i.e. <span class="math inline">\(r - d - q = 0\)</span>, and the stock has constant volatility of 20% per annum, we plot several paths or trajectories. The initial spot price is normalised to 1. Each trajectory below consist of 52 consecutive weekly observations. See Figure <a href="index.html#fig:manyPath-compute-traj">1.1</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nSteps =<span class="st"> </span><span class="dv">52</span> <span class="co"># weekly obs</span>
@@ -201,10 +201,10 @@ for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
 <tbody>
 <tr class="odd">
 <td>Spot price</td>
-<td align="right">1.010354</td>
-<td align="right">1.008503</td>
-<td align="right">1.027878</td>
-<td align="right">1.046089</td>
+<td align="right">1.024129</td>
+<td align="right">1.001771</td>
+<td align="right">1.025383</td>
+<td align="right">0.9895311</td>
 </tr>
 </tbody>
 </table>
@@ -300,24 +300,24 @@ for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
 <tbody>
 <tr class="odd">
 <td>Undl 1</td>
-<td align="right">1.0148149</td>
-<td align="right">1.051679</td>
-<td align="right">1.055015</td>
-<td align="right">0.9982919</td>
+<td align="right">0.9752654</td>
+<td align="right">0.9769363</td>
+<td align="right">0.9966085</td>
+<td align="right">0.9805188</td>
 </tr>
 <tr class="even">
 <td>Undl 2</td>
-<td align="right">0.9873323</td>
-<td align="right">1.018286</td>
-<td align="right">1.025675</td>
-<td align="right">0.9778886</td>
+<td align="right">0.9802384</td>
+<td align="right">0.9786300</td>
+<td align="right">0.9898269</td>
+<td align="right">0.9811299</td>
 </tr>
 <tr class="odd">
 <td>Undl 3</td>
-<td align="right">0.9844207</td>
-<td align="right">1.040822</td>
-<td align="right">1.033495</td>
-<td align="right">0.9804207</td>
+<td align="right">0.9740695</td>
+<td align="right">0.9670629</td>
+<td align="right">0.9822644</td>
+<td align="right">0.9764641</td>
 </tr>
 </tbody>
 </table>
@@ -331,9 +331,10 @@ Figure 1.2: Two separate simulations of the paths of the underlyings in the bask
 <div id="worstof" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Worst-of</h3>
 <p>From a basket of underlyings, we could choose the lowest performing underlying and call it the worst-of underlying. Making this choice over the entire tenor of the product we can visual what a worst-of trajectory looks like.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corrLow =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.1</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">999</span>)
+corrLow =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.1</span>, 
                 <span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>,
-                <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>), 
+                <span class="fl">0.1</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>), 
               <span class="dt">nrow =</span> <span class="dv">3</span>,
               <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Undl 1&quot;</span>, <span class="st">&quot;Undl 2&quot;</span>, <span class="st">&quot;Undl 3&quot;</span>), 
                               <span class="kw">c</span>(<span class="st">&quot;Undl 1&quot;</span>, <span class="st">&quot;Undl 2&quot;</span>, <span class="st">&quot;Undl 3&quot;</span>)))
@@ -345,12 +346,12 @@ for (i in <span class="dv">2</span>:(nSteps<span class="dv">+1</span>))
 <p>In this stylised result we see how the worst-of underlying may differ over time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">2</span>:<span class="dv">5</span>]) <span class="co"># First 4 weekly close of 3 less correlated undls</span></code></pre></div>
 <pre><code>##           [,1]      [,2]      [,3]      [,4]
-## [1,] 1.1135548 1.0202253 0.9835093 1.0333351
-## [2,] 1.0472104 1.0016814 0.9452105 0.9230915
-## [3,] 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
+## [1,] 0.9829799 0.9962827 0.8963073 0.8409755
+## [2,] 0.9283503 0.9127741 0.8495281 0.9129363
+## [3,] 1.0416297 1.0095515 0.9456666 0.9453241</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">woTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, min)
 <span class="kw">print</span>(woTraj[<span class="dv">2</span>:<span class="dv">5</span>]) <span class="co"># First 4 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
+<pre><code>## [1] 0.9283503 0.9127741 0.8495281 0.8409755</code></pre>
 <p>Let’s plot one sample of all underlying paths. On the right we overlay the worst-of “underlying” in blue while greying out the actual underlying paths. See Figure <a href="index.html#fig:wo-traj-plot">1.3</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
@@ -383,12 +384,12 @@ Figure 1.3: A basket of 3 underlyings (in grey) and the worst-of underlying (in 
 <p>Unlike the worst-of call option, a best-of call is more expensive than the average of call. However, if you have a bearish view, buying a best-of put is much more affordable. Likewise, <em>selling</em> a best-of call brings the investor much more premium.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(corrTraj2[,<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of 3 correlated undls</span></code></pre></div>
 <pre><code>##      [,1]      [,2]      [,3]      [,4]      [,5]
-## [1,]    1 1.1135548 1.0202253 0.9835093 1.0333351
-## [2,]    1 1.0472104 1.0016814 0.9452105 0.9230915
-## [3,]    1 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
+## [1,]    1 0.9829799 0.9962827 0.8963073 0.8409755
+## [2,]    1 0.9283503 0.9127741 0.8495281 0.9129363
+## [3,]    1 1.0416297 1.0095515 0.9456666 0.9453241</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boTraj =<span class="st"> </span><span class="kw">apply</span>(corrTraj2, <span class="dv">2</span>, max)
 <span class="kw">print</span>(woTraj[<span class="dv">1</span>:<span class="dv">5</span>]) <span class="co"># First 5 weekly close of the worst &quot;underlying&quot;</span></code></pre></div>
-<pre><code>## [1] 1.0000000 0.9400727 0.8563856 0.8384821 0.8305874</code></pre>
+<pre><code>## [1] 1.0000000 0.9283503 0.9127741 0.8495281 0.8409755</code></pre>
 <p>Again, we see there is no need for the best-of “underlying” to be the same underlying in the basket from start to end of the product tenor. See Figure <a href="index.html#fig:bo-traj-plot">1.4</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(corrTraj2[<span class="dv">1</span>,], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
